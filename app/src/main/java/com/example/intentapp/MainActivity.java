@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import android.util.Log;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -25,20 +26,17 @@ public class MainActivity extends AppCompatActivity {
         Button shareTextButton = findViewById(R.id.shareTextButton);
 
         openBrowserButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"));
-            startActivity(intent);
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com"));
+            startActivity(browserIntent);
         });
         makeCallButton.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:123456789"));
-            startActivity(intent);
+            Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:123456789"));
+            startActivity(callIntent);
         });
         shareTextButton.setOnClickListener(v->{
             Intent intent = new Intent(MainActivity.this, ShareActivity.class);
             startActivity(intent);
         });
-    }
-    public void startActivity(Intent intent) {
-
     }
 }
 

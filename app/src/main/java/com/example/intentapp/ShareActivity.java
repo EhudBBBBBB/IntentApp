@@ -1,6 +1,9 @@
 package com.example.intentapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +18,17 @@ public class ShareActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_share);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        EditText shareEditText = findViewById(R.id.shareEditText);
+        Button shareButton = findViewById(R.id.shareButton);
+
+        shareButton.setOnClickListener(v -> {
+            String textToShare = shareEditText.getText().toString();
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, textToShare);
+            shareIntent.setType("text/plain");
+            startActivity(Intent.createChooser(shareIntent, "Share text via"));
         });
     }
 }
