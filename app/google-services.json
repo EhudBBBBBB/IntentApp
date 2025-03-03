@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "42910809356",
+    "project_id": "intentapp-firebase",
+    "storage_bucket": "intentapp-firebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42910809356:android:b44f72dc913ca2c9fadd29",
+        "android_client_info": {
+          "package_name": "com.example.intentapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBe1y7HsFc9kwPhdiv9zj2K83FJhorKVQo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

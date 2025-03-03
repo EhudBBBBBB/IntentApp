@@ -8,6 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -26,9 +27,13 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptionsExtension;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -72,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-    )
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +85,24 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+    FirebaseApp.initializeApp(this);
+    imageView = findViewById(R.id.profileImage);
+    nameTv = findViewById(R.id.nameTV);
+    mailTv = findViewById(R.id.mailTV);
 
+    GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.client_id)).requestEmail().build();
+    googleSignInClient = GoogleSignIn.getClient(this, options);
+
+
+    auth = FirebaseAuth.getInstance();
+    SignInButton signInButton = findViewById(R.id.signIn);
+    signInButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = googleSignInClient.getSignInIntent();
+            activityResultLauncher.launch(intent);
+        }
+    });
     }
-
 }
 
